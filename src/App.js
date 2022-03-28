@@ -60,9 +60,9 @@ let [shoes, shoes변경] = useState(Data);
         <Detail shoes={shoes}/>
       </Route>
 
-      <Route path="/:id">
+      {/* <Route path="/:id">
         <div>아무거나 적었을 때 이거 보여주삼</div>
-      </Route>
+      </Route> */}
 
     </Switch>
 
