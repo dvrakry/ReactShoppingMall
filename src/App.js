@@ -6,12 +6,16 @@ import logo from './logo.svg';
 import './App.css';
 import Data from './data.js';
 import Detail from './Detail.js';
+import axios from 'axios';
 
 import { Link, Route, Switch } from 'react-router-dom';
 
 function App() {
 
 let [shoes, shoes변경] = useState(Data);
+let [재고, 재고변경] = useState([10,11,12]);
+
+
 
   return (
     <div className="App">
@@ -53,11 +57,21 @@ let [shoes, shoes변경] = useState(Data);
               })
             }
           </div>
+          <button className='btn btn-primary' onClick={()=>{ 
+            axios.get('https://codingapple1.github.io/shop/data2.json')
+            .then((result)=>{ 
+              shoes변경([...shoes, ...result.data]);
+             })
+            .catch(()=>{ 
+              console.log("실패해썽영");
+             });
+
+           }}>더보기</button>
         </div>
       </Route>
 
       <Route path="/detail/:id">
-        <Detail shoes={shoes}/>
+        <Detail shoes={shoes} 재고={재고} 재고변경={재고변경}/>
       </Route>
 
       {/* <Route path="/:id">

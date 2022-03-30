@@ -1,5 +1,6 @@
 /* eslint-disable */
 
+
 import React, { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import styled from 'styled-components';
@@ -21,6 +22,7 @@ function Detail(props){
     let[inputData, inputData변경] = useState('');
 
     useEffect(()=>{
+
       let 타이머 = setTimeout(()=>{ alert변경(false) }, 2000)
       // return function 어쩌구(){}
       return ()=>{ clearTimeout(타이머) }
@@ -40,9 +42,7 @@ function Detail(props){
             <제목 className='red'>상세페이지</제목>
           </박스>
 
-          { inputData }
-          <input onChange={(e)=>{ inputData변경(e.target.value) }}/>
-
+          
           {
             alert == true
             ? <div className='my-alert'>
@@ -59,7 +59,10 @@ function Detail(props){
               <h4 className="pt-5">{찾은상품.title}</h4>
               <p>{찾은상품.content}</p>
               <p>{찾은상품.price}</p>
-              <button className="btn btn-danger">주문하기</button> 
+
+              <Info 재고 ={props.재고}></Info>  
+
+              <button className="btn btn-danger" onClick={()=>{ props.재고변경([9,11,12]) }}>주문하기</button> 
               <button className="btn btn-primary" onClick={()=>{
                 history.goBack();
                 // history.push('/') 이거도 가능;  
@@ -68,6 +71,13 @@ function Detail(props){
           </div>
         </div>
     )
+}
+
+
+function Info(props){
+  return(
+    <p>재고 : {props.재고[0]} </p>
+  )
 }
 
 export default Detail;
