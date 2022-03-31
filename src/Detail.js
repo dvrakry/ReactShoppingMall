@@ -1,10 +1,11 @@
 /* eslint-disable */
 
 
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import './Detail.scss';
+import {재고context} from './App.js';
 
 let 박스 = styled.div`
   padding : 20px;
@@ -17,9 +18,12 @@ let 제목 = styled.h4`
 
 
 
+
+
 function Detail(props){
     let[alert, alert변경] = useState(true);
     let[inputData, inputData변경] = useState('');
+    let 재고 = useContext(재고context);
 
     useEffect(()=>{
 
