@@ -7,6 +7,7 @@ import './App.css';
 import Data from './data.js';
 import Detail from './Detail.js';
 import axios from 'axios';
+import Cart from './Cart.js';
 
 import { Link, Route, Switch } from 'react-router-dom';
 
@@ -82,6 +83,10 @@ let [재고, 재고변경] = useState([10,11,12]);
         <재고context.Provider value={재고}>
           <Detail shoes={shoes} 재고={재고} 재고변경={재고변경}/>
         </재고context.Provider>
+      </Route>
+
+      <Route path="/cart">
+        <Cart></Cart>
       </Route>
 
       {/* <Route path="/:id">
