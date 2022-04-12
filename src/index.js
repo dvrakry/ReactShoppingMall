@@ -8,7 +8,18 @@ import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
 
 import { Provider } from "react-redux";
-import { createStore } from "redux";
+import { combineReducers, createStore } from "redux";
+
+let alert초기값 = true;
+
+function reducer2(state = alert초기값, 액션) {
+  if (액션.type === "alert닫기") {
+    state = false;
+    return state;
+  } else {
+    return state;
+  }
+}
 
 let 초기값 = [
   { id: 0, name: "멋진신발", quan: 2 },
@@ -16,27 +27,28 @@ let 초기값 = [
   { id: 2, name: "간지신발", quan: 11 },
 ];
 
-function reducer(state = 초기값, 액션){
-  if( 액션.type === '수량증가'){
-    
+function reducer(state = 초기값, 액션) {
+  if (액션.type === "항목추가") {
+
+    let copy = [...state];
+    copy.push(액션.payload);
+    return copy
+
+  } else if (액션.type === "수량증가") {
     let copy = [...state];
     copy[0].quan++;
 
-    return copy
-
-  } else if(액션.type === '수량감소'){
-
+    return copy;
+  } else if (액션.type === "수량감소") {
     let copy = [...state];
     copy[0].quan--;
-    return copy
-
+    return copy;
   } else {
-    return state
+    return state;
   }
 }
 
-
-let store = createStore(reducer);
+let store = createStore(combineReducers({ reducer, reducer2 }));
 
 ReactDOM.render(
   <React.StrictMode>
